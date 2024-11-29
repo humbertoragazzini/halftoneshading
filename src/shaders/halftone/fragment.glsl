@@ -1,5 +1,7 @@
 uniform vec3 uColor;
 uniform vec2 uResolution;
+uniform float uShadowRepetitions;
+uniform vec3 uShadowColor;
 
 varying vec3 vNormal;
 varying vec3 vPosition;
@@ -59,7 +61,7 @@ void main()
     color*=light;
 
     // Halftone 
-    float repetition = 100.0;
+    float repetition = uShadowRepetitions;
     vec3 direction = vec3(0.0,-1.0,0.0);
     float low = -0.8;
     float high = 1.5;
@@ -72,7 +74,7 @@ void main()
                     direction,
                     low,
                     high,
-                    pointColor,
+                    uShadowColor,
                     normal
                     );
     // Final color
