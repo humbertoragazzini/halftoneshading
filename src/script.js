@@ -93,6 +93,7 @@ gui.addColor(rendererParameters, "clearColor").onChange(() => {
 const materialParameters = {};
 materialParameters.color = "#ff794d";
 materialParameters.shadowColor = "#8e19b8";
+materialParameters.lightColor = "e5ffe0";
 
 const material = new THREE.ShaderMaterial({
   vertexShader: halftoneVertexShader,
@@ -109,8 +110,12 @@ const material = new THREE.ShaderMaterial({
       )
     ),
     uShadowRepetitions: new THREE.Uniform(100),
+    uLightRepetitions: new THREE.Uniform(100),
     uShadowColor: new THREE.Uniform(
       new THREE.Color(materialParameters.shadowColor)
+    ),
+    uLightColor: new THREE.Uniform(
+      new THREE.Color(materialParameters.lightColor)
     ),
   },
 });
@@ -121,8 +126,14 @@ gui.addColor(materialParameters, "color").onChange(() => {
 
 gui.add(material.uniforms.uShadowRepetitions, "value").min(1).max(300).step(1);
 
+gui.add(material.uniforms.uLightRepetitions, "value").min(1).max(300).step(1);
+
 gui.addColor(materialParameters, "shadowColor").onChange(() => {
   material.uniforms.uShadowColor.value.set(materialParameters.shadowColor);
+});
+
+gui.addColor(materialParameters, "lightColor").onChange(() => {
+  material.uniforms.uLightColor.value.set(materialParameters.lightColor);
 });
 
 /**

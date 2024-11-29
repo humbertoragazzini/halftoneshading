@@ -2,6 +2,8 @@ uniform vec3 uColor;
 uniform vec2 uResolution;
 uniform float uShadowRepetitions;
 uniform vec3 uShadowColor;
+uniform float uLightRepetitions;
+uniform vec3 uLightColor;
 
 varying vec3 vNormal;
 varying vec3 vPosition;
@@ -39,7 +41,11 @@ void main()
     vec3 viewDirection = normalize(vPosition - cameraPosition);
     vec3 normal = normalize(vNormal);
     vec3 color = uColor;
-
+    float low = -0.2;
+    float high = 2.0;
+    float lowL = -0.2;
+    float highL = 2.0;
+    
     //lIGHT
     vec3 light = vec3(0.0);
 
@@ -57,15 +63,11 @@ void main()
         1.0
     );
 
-
     color*=light;
 
     // Halftone 
     float repetition = uShadowRepetitions;
     vec3 direction = vec3(0.0,-1.0,0.0);
-    float low = -0.8;
-    float high = 1.5;
-    vec3 pointColor = vec3(1.0,0.0,0.0);
     
 
     color = halftone(
@@ -75,6 +77,15 @@ void main()
                     low,
                     high,
                     uShadowColor,
+                    normal
+                    );
+    color = halftone(
+                    color,
+                    uLightRepetitions,
+                    vec3(0.0,1.0,0.0),
+                    lowL,
+                    highL,
+                    uLightColor,
                     normal
                     );
     // Final color
