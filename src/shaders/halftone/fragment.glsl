@@ -1,4 +1,5 @@
 uniform vec3 uColor;
+uniform vec2 uResolution;
 
 varying vec3 vNormal;
 varying vec3 vPosition;
@@ -31,8 +32,15 @@ void main()
 
     color*=light;
 
+    // Halftone 
+    float repetition = 50.0;
+
+    vec2 uv = gl_FragCoord.xy / uResolution.y;// this are the position of the xy viewport porsition, more the xy position of the rendered viewport 
+    uv*=repetition;
+    uv = mod(uv, 1.0);
+
     // Final color
-    gl_FragColor = vec4(color, 1.0);
+    gl_FragColor = vec4(uv,1.0, 1.0);
     #include <tonemapping_fragment>
     #include <colorspace_fragment>
 }
