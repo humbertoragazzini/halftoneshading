@@ -1,6 +1,6 @@
 # Halftone MiniProject - Humberto Ragazzini
 
-This project has a cool effect done with a custom vertex/fragment shader called halftone all this is done with pure THREEJS: [Particles morphing](https://humbertoragazzini.github.io/halftoneshading/)
+This project has a cool effect done with a custom vertex/fragment shader called halftone all this is done with pure THREEJS: [halftoneshading](https://humbertoragazzini.github.io/halftoneshading/)
 
 # **Frameworks and Tecnologies**
 
